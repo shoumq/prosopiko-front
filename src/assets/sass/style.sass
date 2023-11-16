@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap')
+
+*
+    font-family: 'Inter', sans-serif
+    font-size: 17rem
+    margin: 0
+    padding: 0
+
+body
+    background: rgba(242, 242, 247, 1)
+
+.container
+    margin-top: 40rem
+    width: 1400rem
+    margin-inline: auto
+
+    @media (max-width: 768px)
+        width: 100%
+
+.title
+    color: #000
+    font-size: 20rem
+    font-weight: 700
+    line-height: 28rem
+    letter-spacing: -0.408rem
+
+.window
+    margin-top: 15rem
+    border-radius: 10rem
+    background: #FFF
+    padding: 30rem
+
+    @media (max-width: 768px)
+        padding: 0
+
+.mutted
+    color: #808085
+    font-size: 17rem
+    line-height: 22rem
+    text-align: center
+    padding: 20rem 0
+
+.search
+    &-flex
+        display: flex
+        gap: 30rem
+
+        input
+            width: 300rem
+            border-radius: 10rem
+            background: rgba(118, 118, 128, 0.12)
+            font-size: 14rem
+            padding: 6rem 32rem
+            padding-right: 6rem
+            border: none
+            outline: none
+            background-image: url('../images/search.png')
+            background-repeat: no-repeat
+            background-position: 10rem
+
+        &__center
+            cursor: pointer
+            background: transparent
+            border: none
+            outline: none
+            display: flex
+            align-items: center
+            gap: 7rem
+            color: #0A84FF
+            font-size: 16rem
+            transition: .2s
+            font-weight: 500
+            user-select: none
+            svg
+                width: 21rem
+                height: 20rem
+            path
+                transition: .2s
+            &:hover
+                color: #2272c2
+                path
+                    stroke: #2272c2
+
+            @media (max-width: 768px)
+                display: none
+
+.flex
+    &-50
+        display: flex
+        gap: 30rem
+
+.main
+    margin-top: 40rem
+    gap: 10rem
+    display: flex
+    gap: 2%
+    align-items: flex-start
+
+    @media (max-width: 768px)
+        display: block
+
+    &-50
+        flex: 0 0 48%
+
+    &_title
+        cursor: pointer
+        background: #E5E5E5
+        padding: 2rem 16rem
+
+    &_item
+        display: block
+        cursor: pointer
+        color: #000
+        font-family: Inter
+        font-size: 17rem
+        font-weight: 400
+        line-height: 22rem
+        padding: 11rem 16rem
+        border-bottom: 1px solid #E0E0E0
+        transition: .2s
+        text-decoration: none
+        &:hover
+            color: rgba(10, 132, 255, 1)
+        &:last-child
+            border-bottom: none
+        &--active
+            color: rgba(10, 132, 255, 1)
+            font-weight: 700
+
+    .info
+        padding-left: 2%
+        border-left: 1rem solid #E0E0E0
+
+        &_buttons
+            margin-top: 50rem
+
+            .primary
+                color: #007AFF
+                font-size: 17rem
+                font-weight: 500
+                line-height: 17rem
+                letter-spacing: -0.408rem
+                border-radius: 9rem
+                outline: none
+                border: none
+                background: #fff
+                transition: .2s
+                cursor: pointer
+                user-select: none
+                width: 140rem
+                &:hover
+                    color: rgba(0, 123, 255, 0.776)
+                    text-decoration-line: underline
+
+            .danger
+                color: rgba(227, 62, 62, 1)
+                font-size: 17rem
+                font-weight: 500
+                line-height: 17rem
+                letter-spacing: -0.408rem
+                border-radius: 9rem
+                outline: none
+                border: none
+                background: #fff
+                transition: .2s
+                cursor: pointer
+                user-select: none
+                margin-top: 20rem
+                width: 150rem
+                &:hover
+                    color: rgba(227, 62, 62, 0.776)
+                    text-decoration-line: underline
+
+        &_column
+            display: flex
+            flex-direction: column
+            gap: 16rem
+
+        &_title
+            color: #000
+            font-size: 18rem
+            font-weight: 700
+            line-height: 22rem
+            margin-bottom: 20rem
+
+        &_flex
+            display: flex
+            gap: 5rem
+
+        &_key
+            color: #838388
+            font-size: 17rem
+            line-height: 22rem
+
+        &_value
+            color: #000
+            font-size: 17rem
+            line-height: 22rem
+
+.scroll
+    overflow-y: scroll
+    height: 700rem
+
+::-webkit-scrollbar
+    width: 5rem
+::-webkit-scrollbar-track
+    background-color: #fff
+
+::-webkit-scrollbar-thumb
+    // background-color: #dfdfdf
+    background: #fff
+    border-radius: 10rem
+
+.blur
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0, 0, 0, 0.10)
+    z-index: 2
+    backdrop-filter: blur(5px)
+
+.modal
+    position: absolute
+    background: #fff
+    border-radius: 10rem
+    width: 450rem
+    z-index: 3
+    margin-left: calc(50% - 240rem)
+    margin-top: 228rem
+    backdrop-filter: blur(0)
+
+    .title
+        color: #000
+        font-size: 18rem
+        font-weight: 500
+        line-height: 22rem
+        letter-spacing: -0.408rem
+        text-align: center
+        padding: 20rem 0
+        border-bottom: 1rem solid #F2F2F7
+
+    input
+        padding: 11rem 0
+        border: none
+        color: #000000
+        outline: none
+        font-size: 17rem
+        line-height: 22rem
+        letter-spacing: -0.408rem
+        border-bottom: 1rem solid #E0E0E0
+        width: 100%
+        ::-webkit-input-placeholder
+            color: #808085
+        &:last-child
+            margin-bottom: 20rem
+
+    .modal_input
+        padding: 9rem 30rem
+
+    .footer
+        display: flex
+        justify-content: center
+        padding-top: 15rem
+        padding-bottom: 20rem
+        border-top: 1rem solid #F2F2F7
+        .primary
+            color: #FFF
+            text-align: center
+            font-size: 17rem
+            font-weight: 600
+            line-height: 22rem
+            letter-spacing: -0.408rem
+            border-radius: 9rem
+            padding: 7rem 26rem
+            outline: none
+            border: none
+            background: rgb(0, 123, 255)
+            transition: .2s
+            cursor: pointer
+            user-select: none
+            &:hover
+                background: rgba(0, 123, 255, 0.776)
+            &:disabled
+                background: rgba(0, 122, 255, 0.20)
+                cursor: default
+
+        .secondary
+            color: #007AFF
+            text-align: center
+            font-size: 17rem
+            font-weight: 400
+            line-height: 22rem
+            letter-spacing: -0.408rem
+            border-radius: 9rem
+            padding: 7rem 26rem
+            outline: none
+            border: none
+            background: #fff
+            transition: .2s
+            cursor: pointer
+            user-select: none
+            &:hover
+                color: rgba(0, 123, 255, 0.776)
+
+        .danger
+            color: rgba(227, 62, 62, 1)
+            text-align: center
+            font-size: 17rem
+            font-weight: 400
+            line-height: 22rem
+            letter-spacing: -0.408rem
+            border-radius: 9rem
+            padding: 7rem 26rem
+            outline: none
+            border: none
+            background: #fff
+            transition: .2s
+            cursor: pointer
+            user-select: none
+            &:hover
+                color: rgba(227, 62, 62, 0.776)
