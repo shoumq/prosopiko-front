@@ -49,27 +49,25 @@
 
 
 
-
-
-
-
         <div class="container">
             <div class="white">
                 <div class="title">Контакты</div>
-                <div class="svg">
+                <router-link to="/new" class="svg pc_none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
                         <path d="M10.305 1.99999V18.61" stroke="#0A84FF" stroke-width="3" stroke-linecap="round"
                             stroke-linejoin="round" />
                         <path d="M2 10.305H18.61" stroke="#0A84FF" stroke-width="3" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
-                </div>
+                </router-link>
             </div>
 
             <div class="window">
                 <div>
                     <div class="search-flex">
-                        <input type="text" placeholder="Поиск">
+                        <form @submit.prevent="search">
+                            <input spellcheck="false" type="text" placeholder="Поиск" v-model="search_data">
+                        </form>
                         <button class="search-flex__center" @click="modalAddFlag = true">
                             <svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.305 1.695V18.305" stroke="#0A84FF" stroke-width="3" stroke-linecap="round"
@@ -113,6 +111,7 @@ export default {
 
             modalAddFlag: false,
             modalEditFlag: false,
+            modalDelFlag: false,
 
             name_input: null,
             surname_input: null,
@@ -120,6 +119,8 @@ export default {
             email_input: null,
 
             save_disabled: true,
+
+            search_data: null
         }
     },
 
@@ -138,6 +139,19 @@ export default {
                         }
                     }
                 })
+        },
+
+        search() {
+            if (this.search_data !== null) {
+                axios.post('http://127.0.0.1:8000/api/search', {
+                    body: this.search_data
+                })
+                    .then(response => {
+                        this.users_server = response.data
+                        this.result = []
+                        this.displayByLetter(this.users_server)
+                    })
+            }
         },
 
         addContact() {

@@ -41,7 +41,8 @@
                         <input type="text" v-model="email_input" placeholder="E-mail">
                     </form>
                     <div class="footer">
-                        <button class="primary">Сохранить</button>
+                        <button class="primary"
+                            @click="editContact(name_input, surname_input, phone_input, email_input)">Сохранить</button>
                         <button class="secondary" @click="modalEditFlag = false">Отменить</button>
                     </div>
                 </div>
@@ -69,13 +70,17 @@
                     </div>
                     Контакты
                 </router-link>
-                <div class="save pc_none">Сохранить</div>
+                <div class="save pc_none" v-if="this.$route.path === '/new'" @click="addContact">Сохранить</div>
+                <div class="save pc_none" v-else @click="editContact(user.name, user.surname, user.phone, user.email)">
+                    Сохранить</div>
             </div>
 
             <div class="window">
                 <div>
                     <div class="search-flex mob_none">
-                        <input type="text" placeholder="Поиск">
+                        <form @submit.prevent="search">
+                            <input spellcheck="false" type="text" placeholder="Поиск" v-model="search_data">
+                        </form>
                         <button class="search-flex__center" @click="modalAddFlag = true">
                             <svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.305 1.695V18.305" stroke="#0A84FF" stroke-width="3" stroke-linecap="round"
@@ -124,7 +129,14 @@
                             </div>
 
 
-                            <div class="info_column pc_none">
+                            <div class="info_column pc_none" v-if="this.$route.path === '/new'">
+                                <input class="input" type="text" placeholder="Имя" v-model="name_input">
+                                <input class="input" type="text" placeholder="Фамилия" v-model="surname_input">
+                                <input class="input" type="text" placeholder="Телефон" v-model="phone_input">
+                                <input class="input" type="text" placeholder="Email" v-model="email_input">
+                            </div>
+
+                            <div class="info_column pc_none" v-else>
                                 <input class="input" type="text" placeholder="Имя" v-model="user.name">
                                 <input class="input" type="text" placeholder="Фамилия" v-model="user.surname">
                                 <input class="input" type="text" placeholder="Телефон" v-model="user.phone">
@@ -141,7 +153,7 @@
             </div>
 
             <div class="info_buttons pc_none">
-                <div class="danger" @click="modalDelFlag = true">Удалить контакт</div>
+                <div class="danger" @click="modalDelFlag = true" v-if="this.$route.path !== '/new'">Удалить контакт</div>
             </div>
         </div>
     </div>
@@ -170,6 +182,8 @@ export default {
             email_input: null,
 
             save_disabled: true,
+
+            search_data: null
         }
     },
 
@@ -188,6 +202,19 @@ export default {
                         }
                     }
                 })
+        },
+
+        search() {
+            if (this.search_data !== null) {
+                axios.post('http://127.0.0.1:8000/api/search', {
+                    body: this.search_data
+                })
+                    .then(response => {
+                        this.users_server = response.data
+                        this.result = []
+                        this.displayByLetter(this.users_server)
+                    })
+            }
         },
 
         delContact() {
@@ -215,6 +242,23 @@ export default {
                     this.users_server.push(response.data)
                     this.result = []
                     this.displayByLetter(this.users_server)
+                    this.$router.push('/')
+                })
+        },
+
+        editContact(name, surname, phone, email) {
+            axios.post('http://127.0.0.1:8000/api/edit_contact', {
+                id: this.$route.params.id,
+                name: name,
+                surname: surname,
+                phone: phone,
+                email: email
+            })
+                .then(() => {
+                    this.modalEditFlag = false
+                    this.result = []
+                    this.displayByLetter(this.users_server)
+                    this.$router.push('/')
                 })
         },
 
