@@ -81,6 +81,9 @@ body
         display: flex
         gap: 30rem
 
+        @media (max-width: 768px)
+            display: block
+
         input
             width: 300rem
             border-radius: 10rem
@@ -94,6 +97,9 @@ body
             background-size: 15rem
             background-repeat: no-repeat
             background-position: 10rem
+
+            @media (max-width: 768px)
+                width: calc(100% - 40rem)
 
         &__center
             cursor: pointer
