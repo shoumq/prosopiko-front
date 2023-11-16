@@ -55,11 +55,26 @@
 
 
         <div class="container">
-            <div class="title">Контакты</div>
+            <div class="title mob_none">Контакты</div>
+
+
+            <div class="pc_none search-flex jus_bet">
+                <router-link to="/" class="jus_bet--back">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="21" viewBox="0 0 12 21" fill="none">
+                            <path
+                                d="M9.60938 20.3906C9.86719 20.6484 10.1953 20.7891 10.582 20.7891C11.3555 20.7891 11.9766 20.1797 11.9766 19.4062C11.9766 19.0195 11.8125 18.668 11.543 18.3984L3.33984 10.3828L11.543 2.39062C11.8125 2.12109 11.9766 1.75781 11.9766 1.38281C11.9766 0.609375 11.3555 0 10.582 0C10.1953 0 9.86719 0.140625 9.60938 0.398438L0.492188 9.30469C0.164062 9.60938 0.0117188 9.98438 0 10.3945C0 10.8047 0.164062 11.1562 0.492188 11.4727L9.60938 20.3906Z"
+                                fill="#0A84FF" />
+                        </svg>
+                    </div>
+                    Контакты
+                </router-link>
+                <div class="save pc_none">Сохранить</div>
+            </div>
 
             <div class="window">
                 <div>
-                    <div class="search-flex">
+                    <div class="search-flex mob_none">
                         <input type="text" placeholder="Поиск">
                         <button class="search-flex__center" @click="modalAddFlag = true">
                             <svg viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,7 +88,7 @@
                     </div>
 
                     <div class="main">
-                        <div class="main-50 scroll">
+                        <div class="main-50 scroll mob_none">
                             <div v-for="(item, index) in result" :key="index">
                                 <div class="main_title">{{ item.letter }}</div>
                                 <router-link :to="'/' + item.id" class="main_item" v-for="(item, index) in item.users"
@@ -84,9 +99,9 @@
                         </div>
 
                         <div class="main-50 info" v-if="infoFlag">
-                            <div class="info_title">Данные о контакте</div>
+                            <div class="info_title mob_none">Данные о контакте</div>
 
-                            <div class="info_column">
+                            <div class="info_column mob_none">
                                 <div class="info_flex">
                                     <div class="info_key">Имя:</div>
                                     <div class="ingo_value">{{ user.name }}</div>
@@ -108,13 +123,25 @@
                                 </div>
                             </div>
 
-                            <div class="info_buttons">
+
+                            <div class="info_column pc_none">
+                                <input class="input" type="text" placeholder="Имя" v-model="user.name">
+                                <input class="input" type="text" placeholder="Фамилия" v-model="user.surname">
+                                <input class="input" type="text" placeholder="Телефон" v-model="user.phone">
+                                <input class="input" type="text" placeholder="Email" v-model="user.email">
+                            </div>
+
+                            <div class="info_buttons mob_none">
                                 <div class="primary" @click="modalEditFlag = true">Редактировать</div>
                                 <div class="danger" @click="modalDelFlag = true">Удалить контакт</div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="info_buttons pc_none">
+                <div class="danger" @click="modalDelFlag = true">Удалить контакт</div>
             </div>
         </div>
     </div>
@@ -172,6 +199,7 @@ export default {
                     this.result = this.result.filter(x => {
                         return x.id != this.$route.params.id;
                     })
+                    this.$router.push('/')
                 })
         },
 

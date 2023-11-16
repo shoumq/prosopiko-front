@@ -16,6 +16,7 @@ body
 
     @media (max-width: 768px)
         width: 100%
+        margin-top: 16rem
 
 .title
     color: #000
@@ -23,6 +24,23 @@ body
     font-weight: 700
     line-height: 28rem
     letter-spacing: -0.408rem
+
+    @media (max-width: 768px)
+        text-align: center
+        font-size: 16rem
+
+.white
+    background: transparent
+    @media (max-width: 768px) 
+        background: #fff
+        margin-top: -18rem
+        padding-top: 18rem
+        padding-bottom: 10rem
+
+        .svg
+            position: absolute
+            top: 22rem
+            right: 15rem
 
 .window
     margin-top: 15rem
@@ -32,6 +50,7 @@ body
 
     @media (max-width: 768px)
         padding: 0
+        margin-top: 0
 
 .mutted
     color: #808085
@@ -39,6 +58,21 @@ body
     line-height: 22rem
     text-align: center
     padding: 20rem 0
+
+.input
+    padding: 11rem 0
+    border: none
+    color: #000000
+    outline: none
+    font-size: 17rem
+    line-height: 22rem
+    letter-spacing: -0.408rem
+    border-bottom: 1rem solid #E0E0E0
+    width: 100%
+    ::-webkit-input-placeholder
+        color: #808085
+        &:last-child
+            margin-bottom: 20rem
 
 .search
     &-flex
@@ -55,6 +89,7 @@ body
             border: none
             outline: none
             background-image: url('../images/search.png')
+            background-size: 15rem
             background-repeat: no-repeat
             background-position: 10rem
 
@@ -98,6 +133,7 @@ body
 
     @media (max-width: 768px)
         display: block
+        margin-top: 20rem
 
     &-50
         flex: 0 0 48%
@@ -127,75 +163,99 @@ body
             color: rgba(10, 132, 255, 1)
             font-weight: 700
 
-    .info
-        padding-left: 2%
-        border-left: 1rem solid #E0E0E0
+.info
+    padding-left: 2%
+    border-left: 1rem solid #E0E0E0
 
-        &_buttons
-            margin-top: 50rem
+    @media (max-width: 768px)
+        padding-left: 4%
 
-            .primary
-                color: #007AFF
-                font-size: 17rem
-                font-weight: 500
-                line-height: 17rem
-                letter-spacing: -0.408rem
-                border-radius: 9rem
-                outline: none
-                border: none
-                background: #fff
-                transition: .2s
-                cursor: pointer
-                user-select: none
-                width: 140rem
-                &:hover
-                    color: rgba(0, 123, 255, 0.776)
-                    text-decoration-line: underline
+    &_buttons
+        margin-top: 50rem
 
-            .danger
-                color: rgba(227, 62, 62, 1)
-                font-size: 17rem
-                font-weight: 500
-                line-height: 17rem
-                letter-spacing: -0.408rem
-                border-radius: 9rem
-                outline: none
-                border: none
-                background: #fff
-                transition: .2s
-                cursor: pointer
-                user-select: none
-                margin-top: 20rem
-                width: 150rem
-                &:hover
-                    color: rgba(227, 62, 62, 0.776)
-                    text-decoration-line: underline
+        @media (max-width: 768px)
+            margin-top: 26rem
 
-        &_column
-            display: flex
-            flex-direction: column
-            gap: 16rem
-
-        &_title
-            color: #000
-            font-size: 18rem
-            font-weight: 700
-            line-height: 22rem
-            margin-bottom: 20rem
-
-        &_flex
-            display: flex
-            gap: 5rem
-
-        &_key
-            color: #838388
+        .primary
+            color: #007AFF
             font-size: 17rem
-            line-height: 22rem
+            font-weight: 500
+            line-height: 17rem
+            letter-spacing: -0.408rem
+            border-radius: 9rem
+            outline: none
+            border: none
+            background: #fff
+            transition: .2s
+            cursor: pointer
+            user-select: none
+            width: 140rem
+            &:hover
+                color: rgba(0, 123, 255, 0.776)
+                text-decoration-line: underline
 
-        &_value
-            color: #000
+        .danger
+            color: rgba(227, 62, 62, 1)
             font-size: 17rem
-            line-height: 22rem
+            font-weight: 500
+            line-height: 17rem
+            letter-spacing: -0.408rem
+            border-radius: 9rem
+            outline: none
+            border: none
+            background: #fff
+            transition: .2s
+            cursor: pointer
+            user-select: none
+            margin-top: 20rem
+            width: 150rem
+            &:hover
+                color: rgba(227, 62, 62, 0.776)
+                text-decoration-line: underline
+            @media (max-width: 768px)
+                background: #fff
+                border-radius: 0
+                width: 100%
+                text-align: center
+                padding: 11rem 0
+                margin-top: 0
+
+    &_column
+        display: flex
+        flex-direction: column
+        gap: 16rem
+
+        @media (max-width: 768px)
+            gap: 0
+
+    &_title
+        color: #000
+        font-size: 18rem
+        font-weight: 700
+        line-height: 22rem
+        margin-bottom: 20rem
+
+    &_flex
+        display: flex
+        gap: 5rem
+
+        @media (max-width: 768px)
+            padding: 11rem 16rem
+            border-bottom: 1rem solid #E0E0E0
+
+        &:last-child
+            @media (max-width: 768px)
+                border-bottom: none
+
+    &_key
+        color: #838388
+        font-size: 17rem
+        line-height: 22rem
+
+    &_value
+        color: #000
+        font-size: 17rem
+        line-height: 22rem
 
 .scroll
     overflow-y: scroll
@@ -230,6 +290,11 @@ body
     margin-left: calc(50% - 240rem)
     margin-top: 228rem
     backdrop-filter: blur(0)
+
+    @media (max-width: 768px)
+        width: 100%
+        margin-top: 100rem
+        margin-inline: auto
 
     .title
         color: #000
@@ -321,3 +386,39 @@ body
             user-select: none
             &:hover
                 color: rgba(227, 62, 62, 0.776)
+
+.mob_none
+    @media (max-width: 768px)
+        display: none
+
+.pc_none
+    display: none
+    @media (max-width: 768px)
+        display: block
+
+.jus_bet
+    display: flex
+    justify-content: space-between
+    padding: 0 10rem
+
+    &--back
+        display: none
+        align-items: center
+        gap: 5rem
+        color: #007AFF
+        font-size: 16rem
+        font-weight: 400
+        line-height: 22rem
+        text-decoration: none
+
+        @media (max-width: 768px)
+            display: flex
+
+    svg
+        width: 12rem
+        height: 21rem
+
+    .save
+        color: #000
+        font-size: 16rem
+        font-weight: 700

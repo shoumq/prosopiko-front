@@ -2,7 +2,6 @@
     <div>
         <div>
             <div class="blur" v-if="modalAddFlag" @click="modalAddFlag = false"></div>
-            <div class="blur" v-if="modalDelFlag" @click="modalDelFlag = false"></div>
             <div class="blur" v-if="modalEditFlag" @click="modalEditFlag = false"></div>
             <div>
                 <div class="modal" v-if="modalAddFlag">
@@ -14,7 +13,7 @@
                         <input type="text" v-model="email_input" @input="inputData" placeholder="E-mail">
                     </form>
                     <div class="footer">
-                        <button class="primary" :disabled="save_disabled">Сохранить</button>
+                        <button class="primary" :disabled="save_disabled" @click="addContact">Сохранить</button>
                         <button class="secondary" @click="modalAddFlag = false">Отменить</button>
                     </div>
                 </div>
@@ -25,7 +24,7 @@
                     <div class="title">Подтвердите действие</div>
                     <div class="mutted">Вы уверены, что хотите удалить контакт?</div>
                     <div class="footer">
-                        <button class="danger">Удалить</button>
+                        <button class="danger" @click="delContact">Удалить</button>
                         <button class="secondary" @click="modalDelFlag = false">Отменить</button>
                     </div>
                 </div>
@@ -55,7 +54,17 @@
 
 
         <div class="container">
-            <div class="title">Контакты</div>
+            <div class="white">
+                <div class="title">Контакты</div>
+                <div class="svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                        <path d="M10.305 1.99999V18.61" stroke="#0A84FF" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M2 10.305H18.61" stroke="#0A84FF" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
 
             <div class="window">
                 <div>
@@ -82,7 +91,6 @@
                                 </router-link>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -101,10 +109,9 @@ export default {
             user: [],
             result: [],
             id_param: this.$route.params.id,
-            infoFlag: false,
+            infoFlag: true,
 
             modalAddFlag: false,
-            modalDelFlag: false,
             modalEditFlag: false,
 
             name_input: null,
@@ -121,6 +128,29 @@ export default {
             axios.get('http://127.0.0.1:8000/api/get_contacts')
                 .then(response => {
                     this.users_server = response.data
+                    this.displayByLetter(this.users_server)
+
+                    for (let i in this.result) {
+                        for (let j in this.result[i].users) {
+                            if (this.result[i].users[j].id == this.id_param) {
+                                this.user = this.result[i].users[j]
+                            }
+                        }
+                    }
+                })
+        },
+
+        addContact() {
+            axios.post('http://127.0.0.1:8000/api/add_contact', {
+                name: this.name_input,
+                surname: this.surname_input,
+                phone: this.phone_input,
+                email: this.email_input
+            })
+                .then(response => {
+                    this.modalAddFlag = false
+                    this.users_server.push(response.data)
+                    this.result = []
                     this.displayByLetter(this.users_server)
                 })
         },
@@ -157,6 +187,10 @@ export default {
         },
     },
 
+    mounted() {
+        this.getContacts()
+    },
+
     watch: {
         $route(to) {
             this.id_param = to.params.id
@@ -181,18 +215,6 @@ export default {
             this.surname_input = null
             this.phone_input = null
             this.email_input = null
-        }
-    },
-
-    mounted() {
-        this.getContacts()
-        if (this.$route.params.id) this.infoFlag = true
-        for (let i in this.users) {
-            for (let j in this.users[i]) {
-                if (this.users[i][j].id == 1) {
-                    this.user = this.users[i][j]
-                }
-            }
         }
     },
 }
