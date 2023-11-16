@@ -121,13 +121,13 @@ export default {
             axios.get('http://127.0.0.1:8000/api/get_contacts')
                 .then(response => {
                     this.users_server = response.data
-                    this.displayPhoneBookByLetter(this.users_server)
+                    this.displayByLetter(this.users_server)
                 })
         },
 
-        displayPhoneBookByLetter(book) {
+        displayByLetter(book) {
             let letters = {}
-            for (let i = 0; i < book.length - 1; i++) {
+            for (let i = 0; i < book.length; i++) {
                 let name = book[i].name
                 let firstLetter = name.charAt(0).toUpperCase()
                 if (!letters[firstLetter]) {
@@ -186,16 +186,6 @@ export default {
 
     mounted() {
         this.getContacts()
-
-        this.users.sort((a, b) => {
-            if (a.name < b.name) {
-                return -1;
-            }
-            if (a.name > b.name) {
-                return 1;
-            }
-            return 0;
-        });
         if (this.$route.params.id) this.infoFlag = true
         for (let i in this.users) {
             for (let j in this.users[i]) {
